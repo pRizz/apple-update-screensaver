@@ -38,7 +38,10 @@
           :flex-direction "column"
           :justify-content "center"}}
    [:img {:src "assets/Apple_logo_white.svg"
-          :style {:width "10%"}}]
+          :style {:width "10%"}
+          :onClick (fn []
+                       (js/console.log "test peter")
+                       (.requestFullscreen (.getElementById js/document "app")))}]
    [:div {:style {:margin-top 50
                   :margin-bottom 0}}
     (loadingBarCmp 30)]
