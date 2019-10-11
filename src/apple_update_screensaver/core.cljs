@@ -6,27 +6,27 @@
 ;; Views
 
 (def loadingBarPath
-  [:path {:d "M 0 0 h 100 c 10 0 10 15 0 15 h -100 c -10 0 -10 -15 0 -15 Z"}])
+  [:path {:d "M 0 0 h 100 c 2 0 2 2 0 2 h -100 c -2 0 -2 -2 0 -2 Z"}])
 
 (defn loadingBarCmp [percentFilled]
-  [:svg {:viewBox "0 0 200 200"}
+  [:svg {:viewBox "0 0 140 10"
+         :width 400
+         :height 20}
    [:clipPath {:id "loadingBarClipPath"} loadingBarPath]
    [:path {:id "loadingBarPath"
-           :d "M 0 0 h 100 c 10 0 10 15 0 15 h -100 c -10 0 -10 -15 0 -15 Z"}]
+           :d "M 0 0 h 100 c 2 0 2 2 0 2 h -100 c -2 0 -2 -2 0 -2 Z"}]
    [:circle {:cx "0" :cy "50" :r "1000" :id "mycircle"}]
-   [:g {:id "loadingBarContent"}
+   [:g {:id "loadingBarContent"
+        :transform "translate(20, 0)"
+        :clip-path "url(#loadingBarClipPath)"}
     [:use {:href "#loadingBarPath"
-           :fill "gray"
-           :stroke "white"}]
+           :fill "gray"}]
     [:rect {:id "filledLoadingBar"
             :fill "white"
             :x (+ -210 (* percentFilled 0.01 120))
             :y 0
             :width 200
-            :height 20}]]
-   [:use {:clip-path "url(#loadingBarClipPath)"
-          :href "#loadingBarContent"
-          :y 50}]])
+            :height 20}]]])
 
 (defn home-page []
   [:div {:style
@@ -39,13 +39,9 @@
           :justify-content "center"}}
    [:img {:src "assets/Apple_logo_white.svg"
           :style {:width "10%"}}]
-   [:div {:style
-          {:borderRadius 1000
-           :backgroundColor "#444"
-           :width "20%"
-           :margin-top 30}}
-    " a"]
-   (loadingBarCmp 100)
+   [:div {:style {:margin-top 50
+                  :margin-bottom 0}}
+    (loadingBarCmp 30)]
    [:div
     {:style
      {:color "white"
